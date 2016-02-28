@@ -55,12 +55,12 @@ void draw() {
 }
 
 void mousePressed() {
-  if (nonFicButton.clicked()) {
+  if (nonFicButton.clicked() && drawState == CHOOSING_GENRE) {
     genre = nonFicButton.type;
     list = nonFicData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
-  } else if (ficButton.clicked()) {
+  } else if (ficButton.clicked() && drawState == CHOOSING_GENRE) {
     genre = ficButton.type;
     list = ficData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
