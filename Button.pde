@@ -20,7 +20,7 @@ class Button {
   
   void draw() {
     rect(pos.x, pos.y, size.x, size.y);
-    text(text, pos.x + 5, pos.y + 2);
+    text(text, pos.x + (size.x/2), pos.y + 2);
   }
   
   boolean clicked() {

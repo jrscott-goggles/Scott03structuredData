@@ -15,6 +15,7 @@ final int SHOWING_GENRE = 1;
 int genre = 0;
 final int NONFIC = 1;
 final int FIC = 2;
+String list;
 
 Button nonFicButton;
 Button ficButton;
@@ -41,7 +42,7 @@ void setup() {
   
   noFill();
   stroke(255);
-  textAlign(LEFT, TOP);
+  textAlign(CENTER, TOP);
 }
 
 void draw() {
@@ -56,9 +57,11 @@ void draw() {
 void mousePressed() {
   if (nonFicButton.clicked()) {
     genre = nonFicButton.type;
+    list = nonFicData.getJSONObject(0).getString("list_name");
     drawState = SHOWING_GENRE;
   } else if (ficButton.clicked()) {
     genre = ficButton.type;
+    list = ficData.getJSONObject(0).getString("list_name");
     drawState = SHOWING_GENRE;
   }
 }
