@@ -4,8 +4,15 @@ void prepButtons() {
 }
 
 PImage[] bookPics;
+boolean booksPicked = false;
 
-void selectBookPics(JSONArray list) {
+void selectBookPics() {
+  JSONArray list;
+  if (genre == NONFIC) {
+    list = nonFicData;
+  } else {
+    list = ficData;
+  }
   bookPics = new PImage[list.size()];
   for (int i = 0; i < list.size(); ++i) {
     if (!list.getJSONObject(i).getJSONArray("book_details").getJSONObject(0).isNull("book_image")) {
@@ -15,4 +22,9 @@ void selectBookPics(JSONArray list) {
     }
     bookPics[i].resize(128, 202);
   }
+  booksPicked = true;
+}
+
+void displayLoading() {
+  text("LOADING...", width/2, height/2);
 }

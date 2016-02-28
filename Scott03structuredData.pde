@@ -48,7 +48,7 @@ void setup() {
 void draw() {
   background(0);
   if (loadingData) {
-    text("LOADING...", width/2, height/2);
+    displayLoading();
   } else {
     drawViz();
   } 
@@ -58,12 +58,12 @@ void mousePressed() {
   if (nonFicButton.clicked()) {
     genre = nonFicButton.type;
     list = nonFicData.getJSONObject(0).getString("list_name");
-    selectBookPics(nonFicData);
+    thread("selectBookPics");
     drawState = SHOWING_GENRE;
   } else if (ficButton.clicked()) {
     genre = ficButton.type;
     list = ficData.getJSONObject(0).getString("list_name");
-    selectBookPics(ficData);
+    thread("selectBookPics");
     drawState = SHOWING_GENRE;
   }
 }
