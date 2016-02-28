@@ -17,6 +17,9 @@ final int NONFIC = 1;
 final int FIC = 2;
 String list;
 
+boolean bookChosen;
+int chosenBook;
+
 Button nonFicButton;
 Button ficButton;
 
@@ -29,17 +32,17 @@ void loadData() {
 }
 
 void setup() {
-  size(800, 800);
+  size(800, 500);
   nytLogo = loadImage("poweredby_nytimes_150c.png");
   prepButtons();
   
   loadingData = true;
+  bookChosen = false;
   drawState = CHOOSING_GENRE;
   thread("loadData");  //creates a thread.  it'll load the data and rest of program will run parallel
   
   noFill();
   stroke(255);
-  textAlign(CENTER, TOP);
 }
 
 void draw() {
@@ -63,9 +66,10 @@ void mousePressed() {
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
   } else if (drawState == SHOWING_GENRE && booksPicked){
-    for (ImgButton b : bookButtons) {
-      if (b.clicked()) {
-        b.doThing();
+    for (int i = 0; i < bookButtons.length; ++i) {
+      if (bookButtons[i].clicked()) {
+        bookChosen = true;
+        chosenBook = i;
       }
     }
   }

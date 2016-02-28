@@ -20,6 +20,7 @@ class Button {
   
   void draw() {
     rect(pos.x, pos.y, size.x, size.y);
+    textAlign(CENTER, TOP);
     text(text, pos.x + (size.x/2), pos.y + 2);
   }
   

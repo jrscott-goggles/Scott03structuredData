@@ -3,7 +3,8 @@ void drawViz() {
     nonFicButton.draw();
     ficButton.draw();
   } else if (drawState == SHOWING_GENRE) {
-    text(list, width/2, 10);
+    textAlign(CENTER);
+    text(list, width/2, 20);
     if (booksPicked) {
       for (ImgButton b : bookButtons) {
         b.draw();
@@ -13,6 +14,17 @@ void drawViz() {
       } else if (inScrollLeft() && bookButtons[0].pos.x <= 0) {
         scrollLeft();
       }
+      if (bookChosen) {
+        //draw the info and the image
+        image(bookButtons[chosenBook].cover, 30, 50);
+        textAlign(LEFT);
+        text("Ranking: " + 0, 200, 75);
+        text("Title: " + 0, 200, 95);
+        text("Author: " + 0, 200, 115);
+        text("Weeks on Best Sellers List " + 0, 200, 135);
+        text("ISBN10#: " + 0, 200, 175);
+        text("ISBN13#: " + 0, 200, 195);
+      }
     } else {
       displayLoading();
     }
@@ -21,11 +33,11 @@ void drawViz() {
 }
 
 boolean inScrollRight() {
-  return mouseX > width-20 && mouseY > height-nytLogo.height-202 && mouseY < height-nytLogo.height;
+  return mouseX > width-50 && mouseY > height-nytLogo.height-202 && mouseY < height-nytLogo.height;
 }
 
 boolean inScrollLeft() {
-  return mouseX < 20 && mouseY > height-nytLogo.height-202 && mouseY < height-nytLogo.height;
+  return mouseX < 50 && mouseY > height-nytLogo.height-202 && mouseY < height-nytLogo.height;
 }
 
 void scrollRight() {

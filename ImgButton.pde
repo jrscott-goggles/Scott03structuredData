@@ -23,7 +23,4 @@ class ImgButton {
     return (mouseX > pos.x && mouseX < pos.x + cover.width && mouseY > pos.y && mouseY < pos.y + cover.height);
   }
   
-  void doThing() {
-    println("BookButton Pressed at " + spot);
-  }
 }

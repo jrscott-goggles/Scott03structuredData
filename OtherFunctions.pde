@@ -29,5 +29,6 @@ void selectBookPics() {
 }
 
 void displayLoading() {
+  textAlign(CENTER);
   text("LOADING...", width/2, height/2);
 }
