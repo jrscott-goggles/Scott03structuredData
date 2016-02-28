@@ -12,6 +12,12 @@ int drawState;
 final int CHOOSING_GENRE = 0;
 final int SHOWING_GENRE = 1;
 
+int genre = 0;
+final int NONFIC = 1;
+final int FIC = 2;
+
+Button nonFicButton;
+Button ficButton;
 
 void loadData() {
   JSONObject nonFicObj = loadJSONObject(NONFIC_URL + API_KEY);
@@ -27,9 +33,15 @@ void loadData() {
 void setup() {
   size(800, 800);
   nytLogo = loadImage("poweredby_nytimes_150c.png");
+  prepButtons();
+  
   loadingData = true;
   drawState = CHOOSING_GENRE;
   thread("loadData");  //creates a thread.  it'll load the data and rest of program will run parallel
+  
+  noFill();
+  stroke(255);
+  textAlign(LEFT, TOP);
 }
 
 void draw() {
@@ -39,4 +51,14 @@ void draw() {
   } else {
     drawViz();
   } 
+}
+
+void mousePressed() {
+  if (nonFicButton.clicked()) {
+    genre = nonFicButton.type;
+    drawState = SHOWING_GENRE;
+  } else if (ficButton.clicked()) {
+    genre = ficButton.type;
+    drawState = SHOWING_GENRE;
+  }
 }

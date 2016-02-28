@@ -1,9 +1,13 @@
 void drawViz() {
   if (drawState == CHOOSING_GENRE) {
-    //two buttons.  one for Non-Fic one for Fic
+    nonFicButton.draw();
+    ficButton.draw();
   } else if (drawState == SHOWING_GENRE) {
-    //draw book info based on genre
-    
+    if (genre == NONFIC) {
+      text("Non-Fiction", width/2, height/2);
+    } else if (genre == FIC) {
+      text("Fiction", width/2, height/2);
+    }
   }
   image(nytLogo, width - nytLogo.width, height - nytLogo.height);
 }
