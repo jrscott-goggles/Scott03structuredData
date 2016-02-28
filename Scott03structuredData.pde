@@ -25,9 +25,6 @@ void loadData() {
   JSONObject ficObj = loadJSONObject(FIC_URL + API_KEY);
   nonFicData = nonFicObj.getJSONArray("results");
   ficData = ficObj.getJSONArray("results");
-  
-  //println(nonFicData);
-  //println(ficData);
   loadingData = false;
 }
 
@@ -65,7 +62,7 @@ void mousePressed() {
     list = ficData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
-  } else {
+  } else if (drawState == SHOWING_GENRE && booksPicked){
     for (ImgButton b : bookButtons) {
       if (b.clicked()) {
         b.doThing();
