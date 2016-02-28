@@ -65,5 +65,11 @@ void mousePressed() {
     list = ficData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
+  } else {
+    for (ImgButton b : bookButtons) {
+      if (b.clicked()) {
+        b.doThing();
+      }
+    }
   }
 }
