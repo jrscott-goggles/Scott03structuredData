@@ -4,11 +4,9 @@ void drawViz() {
     ficButton.draw();
   } else if (drawState == SHOWING_GENRE) {
     text(list, width/2, 10);
-    if (genre == NONFIC) {
-      
-    } else if (genre == FIC) {
-      
-    }
+      for (int i = 0; i < bookPics.length; ++i) {
+        image(bookPics[i], bookPics[i].width * i, bookPics[i].height);
+      }
   }
   image(nytLogo, width - nytLogo.width, height - nytLogo.height);
 }

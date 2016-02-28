@@ -26,8 +26,8 @@ void loadData() {
   nonFicData = nonFicObj.getJSONArray("results");
   ficData = ficObj.getJSONArray("results");
   
-  println(nonFicData);
-  println(ficData);
+  //println(nonFicData);
+  //println(ficData);
   loadingData = false;
 }
 
@@ -58,10 +58,12 @@ void mousePressed() {
   if (nonFicButton.clicked()) {
     genre = nonFicButton.type;
     list = nonFicData.getJSONObject(0).getString("list_name");
+    selectBookPics(nonFicData);
     drawState = SHOWING_GENRE;
   } else if (ficButton.clicked()) {
     genre = ficButton.type;
     list = ficData.getJSONObject(0).getString("list_name");
+    selectBookPics(ficData);
     drawState = SHOWING_GENRE;
   }
 }
