@@ -1,13 +1,24 @@
 void drawViz() {
   if (drawState == CHOOSING_GENRE) {
+    text("The New York Times Best Sellers", width/2, 100);
     nonFicButton.draw();
     ficButton.draw();
   } else if (drawState == SHOWING_GENRE) {
+    JSONArray list;
+    if (genre == NONFIC) {
+      list = nonFicData;
+    } else {
+      list = ficData;
+    }
     textAlign(CENTER);
-    text(list, width/2, 20);
+    text(listName, width/2, 20);
+    text("The bars above each book represent how long they have been on the Best Sellers List", width/2, height - 10);
     if (booksPicked) {
-      for (ImgButton b : bookButtons) {
-        b.draw();
+      for (int i = 0; i < bookButtons.length; ++i) {
+        bookButtons[i].draw();
+        rectMode(CORNERS);
+        fill(i * 255/bookButtons.length);
+        rect(bookButtons[i].pos.x, bookButtons[i].pos.y, bookButtons[i].pos.x+128, bookButtons[i].pos.y - map(list.getJSONObject(i).getInt("weeks_on_list"), 0, mostWeeks, 5, 50));
       }
       if (inScrollRight() && bookButtons[bookButtons.length-1].pos.x >= width-128) {
         scrollRight();
@@ -15,13 +26,6 @@ void drawViz() {
         scrollLeft();
       }
       if (bookChosen) {
-        JSONArray list;
-        if (genre == NONFIC) {
-          list = nonFicData;
-        } else {
-          list = ficData;
-        }
-        //draw the info and the image
         image(bookButtons[chosenBook].cover, 30, 50);
         textAlign(LEFT);
         text("Ranking: " + list.getJSONObject(chosenBook).getInt("rank"), 200, 75);
@@ -33,7 +37,6 @@ void drawViz() {
         if (!list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(0)) {
           isbn10 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(0).getString("isbn10");
           isbn13 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(0).getString("isbn13");
-          println(isbn10);
           if (isbn10.length() == 0 && !list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(1)) {
             isbn10 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(1).getString("isbn10");
           } else if (isbn10.length() == 0) {
@@ -52,7 +55,7 @@ void drawViz() {
       displayLoading();
     }
   }
-  image(nytLogo, width - nytLogo.width, height - nytLogo.height);
+  image(nytLogo, width - nytLogo.width, 0);
 }
 
 boolean inScrollRight() {

@@ -7,18 +7,20 @@ class Button {
   Button() {
     text = "default";
     pos = new PVector(0,0);
-    size = new PVector(textWidth(text) + 5, 20);
+    size = new PVector(textWidth(text) + 28, 24);
     type = 0;
   }
   
    Button(String text, int x, int y, int type) {
     this.text = text;
     pos = new PVector (x,y);
-    size = new PVector(textWidth(text) + 10, 20);
+    size = new PVector(textWidth(text) + 28, 24);
     this.type = type;
   }
   
   void draw() {
+    noFill();
+    rectMode(CORNER);
     rect(pos.x, pos.y, size.x, size.y);
     textAlign(CENTER, TOP);
     text(text, pos.x + (size.x/2), pos.y + 2);

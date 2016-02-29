@@ -1,3 +1,7 @@
+//Justin Scott
+//Project 2: Structured Data
+//Creates an interface that can be used to view data retrieved in JSON fromat from the New York Times Best Sellers List API
+
 final String NONFIC_URL = "http://api.nytimes.com/svc/books/v2/lists/Combined-Print-and-E-Book-Nonfiction?api-key=";
 final String FIC_URL = "http://api.nytimes.com/svc/books/v2/lists/Combined-Print-and-E-Book-Fiction?api-key=";
 final String API_KEY = "ca055fddf3ce35d27e1e58471cef20ee:2:74542989"; //API key goes here
@@ -15,7 +19,7 @@ final int SHOWING_GENRE = 1;
 int genre = 0;
 final int NONFIC = 1;
 final int FIC = 2;
-String list;
+String listName;
 
 boolean bookChosen;
 int chosenBook;
@@ -41,7 +45,7 @@ void setup() {
   drawState = CHOOSING_GENRE;
   thread("loadData");  //creates a thread.  it'll load the data and rest of program will run parallel
   
-  noFill();
+  textSize(14);
   stroke(255);
 }
 
@@ -57,12 +61,12 @@ void draw() {
 void mousePressed() {
   if (nonFicButton.clicked() && drawState == CHOOSING_GENRE) {
     genre = nonFicButton.type;
-    list = nonFicData.getJSONObject(0).getString("list_name");
+    listName = nonFicData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
   } else if (ficButton.clicked() && drawState == CHOOSING_GENRE) {
     genre = ficButton.type;
-    list = ficData.getJSONObject(0).getString("list_name");
+    listName = ficData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
   } else if (drawState == SHOWING_GENRE && booksPicked){

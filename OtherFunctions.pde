@@ -5,6 +5,7 @@ void prepButtons() {
 
 ImgButton[] bookButtons;
 boolean booksPicked = false;
+int mostWeeks = 0;
 
 void selectBookPics() {
   JSONArray list;
@@ -24,6 +25,9 @@ void selectBookPics() {
     cover.resize(128, 202);
     PVector pos = new PVector(cover.width * i, height-nytLogo.height-cover.height);
     bookButtons[i] = new ImgButton(i, cover, pos);
+    if (mostWeeks < list.getJSONObject(i).getInt("weeks_on_list")) {
+      mostWeeks = list.getJSONObject(i).getInt("weeks_on_list");
+    }
   }
   booksPicked = true;
 }
