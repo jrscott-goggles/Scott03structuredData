@@ -26,25 +26,19 @@ int chosenBook;
 
 Button nonFicButton;
 Button ficButton;
+Button back;
 
-void loadData() {
-  JSONObject nonFicObj = loadJSONObject(NONFIC_URL + API_KEY);
-  JSONObject ficObj = loadJSONObject(FIC_URL + API_KEY);
-  nonFicData = nonFicObj.getJSONArray("results");
-  ficData = ficObj.getJSONArray("results");
-  loadingData = false;
-}
 
 void setup() {
   size(800, 500);
   nytLogo = loadImage("poweredby_nytimes_150c.png");
   prepButtons();
-  
+
   loadingData = true;
   bookChosen = false;
   drawState = CHOOSING_GENRE;
   thread("loadData");  //creates a thread.  it'll load the data and rest of program will run parallel
-  
+
   textSize(14);
   stroke(255);
 }
@@ -55,7 +49,7 @@ void draw() {
     displayLoading();
   } else {
     drawViz();
-  } 
+  }
 }
 
 void mousePressed() {
@@ -69,11 +63,16 @@ void mousePressed() {
     listName = ficData.getJSONObject(0).getString("list_name");
     thread("selectBookPics");
     drawState = SHOWING_GENRE;
-  } else if (drawState == SHOWING_GENRE && booksPicked){
+  } else if (drawState == SHOWING_GENRE && booksPicked) {
     for (int i = 0; i < bookButtons.length; ++i) {
       if (bookButtons[i].clicked()) {
         bookChosen = true;
         chosenBook = i;
+      }
+      if (back.clicked()) {
+        drawState = CHOOSING_GENRE;
+        bookChosen = false;
+        booksPicked = false;
       }
     }
   }

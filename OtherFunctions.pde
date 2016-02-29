@@ -1,6 +1,15 @@
+void loadData() {
+  JSONObject nonFicObj = loadJSONObject(NONFIC_URL + API_KEY);
+  JSONObject ficObj = loadJSONObject(FIC_URL + API_KEY);
+  nonFicData = nonFicObj.getJSONArray("results");
+  ficData = ficObj.getJSONArray("results");
+  loadingData = false;
+}
+
 void prepButtons() {
   nonFicButton = new Button("Non-Fiction", width/2 - width/4, height/2, NONFIC);
   ficButton = new Button("Fiction", width/2 + width/4, height/2, FIC);
+  back = new Button("Back", 0, height - 24, 0);
 }
 
 ImgButton[] bookButtons;

@@ -14,6 +14,7 @@ void drawViz() {
     text(listName, width/2, 20);
     text("The bars above each book represent how long they have been on the Best Sellers List", width/2, height - 10);
     if (booksPicked) {
+      back.draw();
       for (int i = 0; i < bookButtons.length; ++i) {
         bookButtons[i].draw();
         rectMode(CORNERS);
