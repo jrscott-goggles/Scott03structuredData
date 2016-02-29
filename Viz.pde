@@ -30,9 +30,10 @@ void drawViz() {
         image(bookButtons[chosenBook].cover, 30, 50);
         textAlign(LEFT);
         text("Ranking: " + list.getJSONObject(chosenBook).getInt("rank"), 200, 75);
-        text("Title: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("title"), 200, 95);
-        text("Author: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("author"), 200, 115);
-        text("Weeks on Best Sellers List: " + list.getJSONObject(chosenBook).getInt("weeks_on_list"), 200, 135);
+        text("Rank Last Week: " + list.getJSONObject(chosenBook).getInt("rank_last_week"), 200, 95);
+        text("Title: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("title"), 200, 115);
+        text("Author: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("author"), 200, 135);
+        text("Weeks on Best Sellers List: " + list.getJSONObject(chosenBook).getInt("weeks_on_list"), 200, 155);
         String isbn10 = "not available";
         String isbn13 = "not available";
         if (!list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(0)) {
@@ -49,8 +50,8 @@ void drawViz() {
             isbn13 = "not available";
           }
         }
-        text("ISBN10#: " + isbn10, 200, 175);
-        text("ISBN13#: " + isbn13, 200, 195);
+        text("ISBN10#: " + isbn10, 200, 195);
+        text("ISBN13#: " + isbn13, 200, 215);
       }
     } else {
       displayLoading();
