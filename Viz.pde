@@ -15,15 +15,38 @@ void drawViz() {
         scrollLeft();
       }
       if (bookChosen) {
+        JSONArray list;
+        if (genre == NONFIC) {
+          list = nonFicData;
+        } else {
+          list = ficData;
+        }
         //draw the info and the image
         image(bookButtons[chosenBook].cover, 30, 50);
         textAlign(LEFT);
-        text("Ranking: " + 0, 200, 75);
-        text("Title: " + 0, 200, 95);
-        text("Author: " + 0, 200, 115);
-        text("Weeks on Best Sellers List " + 0, 200, 135);
-        text("ISBN10#: " + 0, 200, 175);
-        text("ISBN13#: " + 0, 200, 195);
+        text("Ranking: " + list.getJSONObject(chosenBook).getInt("rank"), 200, 75);
+        text("Title: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("title"), 200, 95);
+        text("Author: " + list.getJSONObject(chosenBook).getJSONArray("book_details").getJSONObject(0).getString("author"), 200, 115);
+        text("Weeks on Best Sellers List: " + list.getJSONObject(chosenBook).getInt("weeks_on_list"), 200, 135);
+        String isbn10 = "not available";
+        String isbn13 = "not available";
+        if (!list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(0)) {
+          isbn10 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(0).getString("isbn10");
+          isbn13 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(0).getString("isbn13");
+          println(isbn10);
+          if (isbn10.length() == 0 && !list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(1)) {
+            isbn10 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(1).getString("isbn10");
+          } else if (isbn10.length() == 0) {
+            isbn10 = "not available";
+          }
+          if (isbn13.length() == 0 && !list.getJSONObject(chosenBook).getJSONArray("isbns").isNull(1)) {
+            isbn13 = list.getJSONObject(chosenBook).getJSONArray("isbns").getJSONObject(1).getString("isbn13");
+          } else if (isbn13.length() == 0) {
+            isbn13 = "not available";
+          }
+        }
+        text("ISBN10#: " + isbn10, 200, 175);
+        text("ISBN13#: " + isbn13, 200, 195);
       }
     } else {
       displayLoading();
